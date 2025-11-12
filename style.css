@@ -939,6 +939,7 @@ background: #ffffff;
   padding: 25px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: center;
+  color: black;
 }
 
 .form-container h2 {
@@ -953,6 +954,8 @@ background: #ffffff;
   border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
+  color: black;
+
 }
 
 .form-container button {
@@ -968,6 +971,7 @@ background: #ffffff;
 .form-container a {
   color: var(--secondary);
   text-decoration: none;
+    
 }
 
 .form-container a:hover {
