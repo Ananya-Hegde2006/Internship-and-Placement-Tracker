@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Top Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-content">
+            <h2>👨‍💼 Admin Portal</h2>
+            <button onclick="window.location.href='index.html'" class="btn-secondary">Logout</button>
+        </div>
+    </nav>
+
+    <div class="dashboard-container">
+        <!-- Overview Statistics -->
+        <div class="section">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-value" id="totalUsers">0</div>
+                    <div class="stat-label">Total Students</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalApplications">0</div>
+                    <div class="stat-label">Total Applications</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="pendingReviews">0</div>
+                    <div class="stat-label">Pending Reviews</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-value" id="totalPlacements">0</div>
+                    <div class="stat-label">Placements Given</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Student Applications List -->
+        <div class="section">
+            <div class="section-header">
+                <h3>👥 Student Applications</h3>
+                <div class="filters">
+                    <input type="text" id="searchStudents" placeholder="Search students...">
+                    <select id="filterStatus">
+                        <option value="">All Status</option>
+                        <option value="Pending">Pending</option>
+                        <option value="Shortlisted">Shortlisted</option>
+                        <option value="Selected">Selected</option>
+                        <option value="Rejected">Rejected</option>
+                    </select>
+                </div>
+            </div>
+            <div id="applicationsList"></div>
+        </div>
+
+        <!-- Add/Manage Internships Section -->
+        <div class="section">
+            <div class="section-header">
+                <h3>💼 Manage Internships & Placements</h3>
+                <button onclick="showAddJobForm()" class="btn-primary">+ Add Position</button>
+            </div>
+            <div id="jobsList"></div>
+        </div>
+
+        <!-- Direct Placement Section -->
+        <div class="section">
+            <div class="section-header">
+                <h3>🎯 Give Direct Placements</h3>
+            </div>
+            <div class="filters" style="margin-bottom: 1.5rem;">
+                <input type="text" id="searchStudentsPlacement" placeholder="Search student by name...">
+            </div>
+            <div id="placementList"></div>
+        </div>
+    </div>
+
+    <!-- Modal: Add New Job/Internship -->
+    <div id="addJobModal" class="modal">
+        <div class="modal-content">
+            <h3>Add New Position</h3>
+            <form id="addJobForm">
+                <div class="form-group">
+                    <label>Company Name *</label>
+                    <input type="text" id="companyName" required>
+                </div>
+                <div class="form-group">
+                    <label>Job Title/Role *</label>
+                    <input type="text" id="jobRole" required>
+                </div>
+                <div class="form-group">
+                    <label>Type *</label>
+                    <select id="jobType" required>
+                        <option value="Internship">Internship</option>
+                        <option value="Full-Time">Full-Time</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Required Qualification *</label>
+                    <select id="jobQualification" required>
+                        <option value="">Select...</option>
+                        <option value="B.Tech">B.Tech</option>
+                        <option value="MCA">MCA</option>
+                        <option value="BCA">BCA</option>
+                        <option value="M.Tech">M.Tech</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Minimum CGPA *</label>
+                    <input type="number" id="minCGPA" step="0.1" min="0" max="10" required>
+                </div>
+                <div class="form-group">
+                    <label>Required Skills *</label>
+                    <input type="text" id="requiredSkills" required placeholder="React, Node.js, MongoDB">
+                </div>
+                <div class="form-group">
+                    <label>Application Deadline *</label>
+                    <input type="date" id="jobDeadline" required>
+                </div>
+                <div class="form-group">
+                    <label>Package/Stipend (LPA) *</label>
+                    <input type="number" id="jobPackage" step="0.1" min="0" required>
+                </div>
+                <div class="form-group">
+                    <label>Job Description *</label>
+                    <textarea id="jobDescription" rows="4" required placeholder="Describe the role..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-primary">Add Position</button>
+                    <button type="button" onclick="closeModal('addJobModal')" class="btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Modal: View Student Details & Give Placement -->
+    <div id="studentDetailModal" class="modal">
+        <div class="modal-content modal-large">
+            <h3>Student Details & Application</h3>
+            <div id="studentDetailContent"></div>
+            <div class="modal-actions">
+                <button onclick="givePlacement()" class="btn-success">Give Placement</button>
+                <button onclick="shortlistStudent()" class="btn-primary">Shortlist</button>
+                <button onclick="rejectStudent()" class="btn-danger">Reject</button>
+                <button onclick="closeModal('studentDetailModal')" class="btn-secondary">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal: Direct Placement to Student -->
+    <div id="placementModal" class="modal">
+        <div class="modal-content">
+            <h3>Give Direct Placement</h3>
+            <form id="placementForm">
+                <div class="form-group">
+                    <label>Select Position *</label>
+                    <select id="placementJobSelect" required>
+                        <option value="">Loading positions...</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Notes (Optional)</label>
+                    <textarea id="placementNotes" rows="3" placeholder="Add notes about this placement..."></textarea>
+                </div>
+                <div class="modal-actions">
+                    <button type="submit" class="btn-success">Confirm Placement</button>
+                    <button type="button" onclick="closeModal('placementModal')" class="btn-secondary">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="https://public-frontend-cos.metadl.com/mgx/img/favicon.png" type="image/png">
+    <title>Placement & Internship Tracker</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+<body>
+    <!-- Landing Page: Choose between Student or Admin Portal -->
+    <div class="landing-container">
+        <div class="landing-card">
+            <h1>🎓 Placement Tracker</h1>
+            <p class="subtitle">Bridging talent with opportunities</p>
+            
+            <div class="role-selection">
+                <!-- Student Portal Button -->
+                <div class="role-card" onclick="window.location.href='student-login.html'">
+                    <div class="role-icon">👤</div>
+                    <h3>Student Portal</h3>
+                    <p>Apply for internships, track applications, and see your ranking</p>
+                </div>
+                
+                <!-- Admin Portal Button -->
+                <div class="role-card" onclick="window.location.href='admin-login.html'">
+                    <div class="role-icon">👨‍💼</div>
+                    <h3>Admin Portal</h3>
+                    <p>Review applications and give direct placements</p>
+                </div>
+            </div>
+            
+            <div class="demo-note">
+                <small>Demo Mode: No registration required. All data stored locally.</small>
+            </div>
+        </div>
+    </div>
+
+    <script src="./script.js"></script>
+</body>
+</html>

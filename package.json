@@ -1,0 +1,10 @@
+{
+  "name": "placement-tracker",
+  "version": "1.0.0",
+  "description": "Placement and Internship Tracker",
+  "scripts": {
+    "dev": "echo 'Development server already running'",
+    "build": "echo 'No build needed for pure HTML/CSS/JS project'",
+    "lint": "echo 'linted'"
+  }
+}
