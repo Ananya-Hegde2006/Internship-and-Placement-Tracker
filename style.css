@@ -374,7 +374,7 @@ background: rgba(255, 255, 255, 0.95);
     border-radius: 10px;
     font-size: 1rem;
     transition: all 0.3s ease;
-    text-color:#dddddd;
+    color: black;
     
 background: #ffffff;
 
@@ -939,7 +939,7 @@ background: #ffffff;
   padding: 25px;
   box-shadow: 0 0 15px rgba(0,0,0,0.2);
   text-align: center;
-  color: black;
+  
 }
 
 .form-container h2 {
@@ -954,8 +954,7 @@ background: #ffffff;
   border-radius: 8px;
   border: 1px solid #ccc;
   outline: none;
-  color: black;
-
+  
 }
 
 .form-container button {
